@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
     <script type="text/babel" >
         "use strict";
-    
+        let increment = { value: 0 };
+        let socket;
+        
+        const updateNumber = () => {
+            socket.emit('msgToServer', increment);
+        };
+        
+        const init = () => {
+            
+            socket = io.connect();
+            
+            socket.on('connect', () => {
+                console.log('connecting');
+                
+                socket.emit('join', increment);
+                setInterval(updateNumber, 1000);
+            });
+            
+            socket.on('msg', (data) => {
+                let increment = data;
+                const valuePara = document.querySelector("#value");
+                
+                valuePara.innerHTML = increment.value;
+            });
+        };
+        
+        window.onload = init;
     </script>
 </head>
 <body>
-
+    <p id="value"></p>
 </body>
 </html>
