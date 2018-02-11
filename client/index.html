@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        p{
+            border-style: solid;
+            text-align: center;
+        };
+    </style>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
     <script type="text/babel" >
@@ -27,7 +33,7 @@
                 let increment = data;
                 const valuePara = document.querySelector("#value");
                 
-                valuePara.innerHTML = increment.value;
+                valuePara.innerHTML = "The current value is " + increment.value;
             });
         };
         
