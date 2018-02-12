@@ -23,8 +23,7 @@ const increment = { value: 0 };
 const onJoined = (sock) => {
   const socket = sock;
 
-  socket.on('join', (data) => {
-      
+  socket.on('join', () => {
     socket.join('room1');
   });
 };
@@ -32,7 +31,7 @@ const onJoined = (sock) => {
 const onUpdate = (sock) => {
   const socket = sock;
 
-  socket.on('msgToServer', (data) => {
+  socket.on('msgToServer', () => {
     increment.value++;
     io.sockets.in('room1').emit('msg', increment);
   });
